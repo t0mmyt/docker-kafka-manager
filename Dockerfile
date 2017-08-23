@@ -4,8 +4,14 @@ LABEL maintainer Tom Taylor <tom+dockerfiles@tomm.yt>
 ENV VERSION=1.3.3.13
 ENV ZK_HOSTS="127.0.0.1:2181"
 
-ADD https://github.com/yahoo/kafka-manager/archive/${VERSION}.tar.gz /
-WORKDIR /kafka-manager-${VERSION}
-RUN ./sbt clean compile
+RUN curl -sLo km.tar.gz https://github.com/yahoo/kafka-manager/archive/${VERSION}.tar.gz && \
+    tar xf km.tar.gz && cd /kafka-manager-${VERSION} && \
+    ./sbt clean dist && \
+    mv target/universal/kafka-manager-${VERSION}.zip / && cd / && \
+    rm -rf /kafka-manager-${VERSION} /km.tar.gz && \
+    unzip kafka-manager-${VERSION}.zip && ln -s /kafka-manager-${VERSION} /kafka-manager && \
+    rm  /kafka-manager-${VERSION}.zip
 
-ENTRYPOINT [ "/kafka-manager-${VERSION}/bin/kafka-manager" ]
+WORKDIR /kafka
+
+ENTRYPOINT [ "/kafka-manager/bin/kafka-manager" ]
