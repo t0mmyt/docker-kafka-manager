@@ -8,7 +8,7 @@ RUN curl -sLo km.tar.gz https://github.com/yahoo/kafka-manager/archive/${VERSION
     tar xf km.tar.gz && cd /kafka-manager-${VERSION} && \
     ./sbt clean dist && \
     mv target/universal/kafka-manager-${VERSION}.zip / && cd / && \
-    rm -rf /kafka-manager-${VERSION} /km.tar.gz /root/.{sbt,ivy2} && \
+    rm -rf /kafka-manager-${VERSION} /km.tar.gz /root/.sbt /root/.ivy2 && \
     unzip kafka-manager-${VERSION}.zip && ln -s /kafka-manager-${VERSION} /kafka-manager && \
     rm  /kafka-manager-${VERSION}.zip
 
