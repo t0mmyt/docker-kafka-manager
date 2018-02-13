@@ -1,7 +1,7 @@
 FROM openjdk:8
 LABEL maintainer Tom Taylor <tom+dockerfiles@tomm.yt>
 
-ENV VERSION=1.3.3.14
+ENV VERSION=1.3.3.16
 ENV ZK_HOSTS="127.0.0.1:2181"
 
 RUN curl -sLo km.tar.gz https://github.com/yahoo/kafka-manager/archive/${VERSION}.tar.gz && \
